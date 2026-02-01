@@ -2,20 +2,20 @@ pipeline {
 	agent any
 	environment {
 		DOCKERHUB_CRED=credentials('dockerhub')
-		IMAGE_NAME="gowri032/my-web-app"
+		IMAGE_NAME="<docker_hub_username>/<docker_hub_repo_name>"
 	}
 	
 	stages {
 		stage('checkout') {
 			steps {
-				git url:'https://github.com/Gowri0126/my-web-app', branch:'main' 
+				git url:'<github_repo_ssh_url>', branch:'main' 
 			}
 		}
 		
 		stage('Build Docker Image') {
 			steps {
 				script {
-					dockerImage=docker.build("my-web-app:latest")
+					dockerImage=docker.build("${IMAGE_NAME}:latest")
 				}
 			}
 		}
@@ -31,16 +31,5 @@ pipeline {
 		}
 	}
 	
-	post {
-    always {
-        echo 'Cleaning Up Workspace'
-        node {
-            deleteDir()
-        }
-    }
-    failure {
-        echo 'Pipeline Failed'
-    }
+	
 }
-}
-
