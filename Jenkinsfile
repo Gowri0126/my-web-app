@@ -2,13 +2,13 @@ pipeline {
 	agent any
 	environment {
 		DOCKERHUB_CRED=credentials('dockerhub')
-		IMAGE_NAME="gowri032/gowri_repo"
+		IMAGE_NAME="gowri032/my-web-app"
 	}
 	
 	stages {
 		stage('checkout') {
 			steps {
-				git url:'http://github.com/my-web-app.git', branch:'main' 
+				git url:'https://github.com/Gowri0126/my-web-app', branch:'main' 
 			}
 		}
 		
