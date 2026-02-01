@@ -32,15 +32,15 @@ pipeline {
 	}
 	
 	post {
-		success {
-			echo "Pipeline Successful"
-		}
-		failure {
-			echo "Pipeline Failed"
-		}
-		always {
-			echo "Cleaning Up WorkSpace"
-			deleteDir()
-		}
-	}
+    always {
+        echo 'Cleaning Up Workspace'
+        node {
+            deleteDir()
+        }
+    }
+    failure {
+        echo 'Pipeline Failed'
+    }
 }
+}
+
